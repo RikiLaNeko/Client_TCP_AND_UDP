@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Serveur_TCP_Mono">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Client_TCP_Etudiants/dist/Serveur_TCP_Mono.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client_tcp.FXMLDocumentController">
+    <children>
+        <Button fx:id="button" layoutX="488.0" layoutY="320.0" text="Envoyer" AnchorPane.leftAnchor="510.0" />
+        <Label fx:id="label2" layoutX="14.0" layoutY="396.0" minHeight="16" minWidth="69" text="\@ IP du serveur:" AnchorPane.leftAnchor="5.0" />
+      <Label fx:id="label1" layoutX="268.0" layoutY="396.0" minHeight="16" minWidth="69" text="Port du serveur:" AnchorPane.leftAnchor="270.0" />
+      <TextField fx:id="textFieldIP" alignment="CENTER" layoutX="103.0" layoutY="392.0" text="127.0.0.1" AnchorPane.leftAnchor="103.0" />
+      <TextField fx:id="textFieldPort" alignment="CENTER" layoutX="368.0" layoutY="392.0" prefHeight="25.0" prefWidth="129.0" text="4000" AnchorPane.leftAnchor="370.0" />
+      <TextField fx:id="textFieldRequette" layoutX="103.0" layoutY="320.0" prefHeight="25.0" prefWidth="398.0" />
+      <Label fx:id="label3" layoutX="14.0" layoutY="324.0" minHeight="16" minWidth="69" text="Requette:" AnchorPane.leftAnchor="5.0" />
+      <TextArea fx:id="textAreaReponses" layoutX="14.0" layoutY="14.0" prefHeight="278.0" prefWidth="558.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <effect>
+            <InnerShadow color="#000000cd" height="128.0" radius="63.5" width="128.0" />
+         </effect></TextArea>
+      <Button fx:id="connecter" defaultButton="true" layoutX="510.0" layoutY="434.0" text="On" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" />
+      <Button fx:id="deconnecter" defaultButton="true" layoutX="502.0" layoutY="434.0" text="Off" textAlignment="CENTER" AnchorPane.rightAnchor="45.0" />
+      <Circle fx:id="voyant" fill="RED" layoutX="535.0" layoutY="405.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="28.0" />
+    </children>
+</AnchorPane>
