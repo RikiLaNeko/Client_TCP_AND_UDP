@@ -38,11 +38,21 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         voyant.setFill(RED);
         connecter.setOnAction((e)->Connecter());
+
         //...
     }
 
     private void Connecter() {
         //...
+        String adresseServeur = textFieldIP.getText();
+        int port = Integer.parseInt(textFieldPort.getText());
+        try {
+            tcp = new TCP(InetAddress.getByName(adresseServeur), port, this);
+            tcp.start();;
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
 
 
     }

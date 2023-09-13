@@ -51,9 +51,11 @@ public class TCP extends Thread {
         out=new PrintStream(socket.getOutputStream());
     }
     
-    public void deconnection() throws InterruptedException   {
+    public void deconnection() throws InterruptedException, IOException {
         //...
-        
+        if (socket != null && !socket.isClosed()) {
+            socket.close();
+        }
     }
         
     public void requette(String laRequette) throws IOException  {
@@ -63,10 +65,14 @@ public class TCP extends Thread {
     
     public void run() {
     
-        while(marche) {
-           //...
-
-            
+        while (marche) {
+try {
+                String reponse=in.readLine(); // reception reseau
+                System.out.println("la reponse "+reponse);
+                updateMessage(reponse);
+            } catch (IOException ex) {
+                System.out.println("erreur reception reseau");
+            }
         }
         
     }

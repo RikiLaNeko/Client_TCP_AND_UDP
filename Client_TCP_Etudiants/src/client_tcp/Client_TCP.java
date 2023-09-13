@@ -23,7 +23,6 @@ public class Client_TCP extends Application {
         
         Scene scene = new Scene(root);
         stage.setOnCloseRequest(event -> {
-
         });
 
         stage.setScene(scene);
