@@ -11,10 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Michael
- */
 public class Client_TCP extends Application {
     
     @Override
@@ -37,3 +33,5 @@ public class Client_TCP extends Application {
     }
     
 }
+
+
