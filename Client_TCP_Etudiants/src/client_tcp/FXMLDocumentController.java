@@ -7,10 +7,7 @@ import java.net.*;
 import java.util.*;
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Circle;
@@ -26,6 +23,7 @@ public class FXMLDocumentController implements Initializable {
     public Button connecter;
     public Button deconnecter;
     public Button button;
+    
     static boolean enRun=false;
 
     TCP tcp=new TCP();
