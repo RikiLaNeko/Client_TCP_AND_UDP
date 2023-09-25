@@ -21,6 +21,7 @@
       <Button fx:id="connecter" defaultButton="true" layoutX="510.0" layoutY="434.0" text="On" textAlignment="CENTER" AnchorPane.rightAnchor="10.0" />
       <Button fx:id="deconnecter" defaultButton="true" layoutX="502.0" layoutY="434.0" text="Off" textAlignment="CENTER" AnchorPane.rightAnchor="45.0" />
       <Circle fx:id="voyant" fill="RED" layoutX="535.0" layoutY="405.0" radius="17.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="28.0" />
-      <ToggleButton fx:id="toggle_udp" layoutX="40.0" layoutY="434.0" mnemonicParsing="false" text="UDP" />
+      <CheckBox fx:id="udp_toggle" layoutX="19.0" layoutY="426.0" mnemonicParsing="false" text="UDP" />
+      <CheckBox fx:id="tcp_toggle" layoutX="103.0" layoutY="426.0" mnemonicParsing="false" text="TCP" />
     </children>
 </AnchorPane>

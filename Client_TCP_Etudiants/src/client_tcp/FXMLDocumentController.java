@@ -2,7 +2,6 @@ package client_tcp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.*;
 import java.util.*;
 
@@ -25,41 +24,108 @@ public class FXMLDocumentController implements Initializable {
     public Button button;
     
     static boolean enRun=false;
+    public CheckBox udp_toggle;
+    public CheckBox tcp_toggle;
 
     TCP tcp=new TCP();
+    UDP udp=new UDP();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         voyant.setFill(RED);
         deconnecter.setDisable(true);
         button.setDisable(true);
-        connecter.setOnAction((e)->Connecter());
+        connecter.setOnAction((e)-> {
+            try {
+                Connecter();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         deconnecter.setOnAction((e)->Deconnecter());
-        button.setOnAction((e)->Requette());
+        button.setOnAction((e)-> {
+            try {
+                Requette();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        udp_toggle.setOnAction((e)-> {
+            try {
+                udp_toggle();
+            } catch (UnknownHostException ex) {
+                throw new RuntimeException(ex);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        udp_toggle.setSelected(false);
+        udp_toggle.setDisable(false);
+        tcp_toggle.setOnAction((e)->tcp_toggle());
+        tcp_toggle.setSelected(true);
+        tcp_toggle.setDisable(true);
         //...
     }
 
-    private void Connecter() {
+    public void udp_toggle() throws IOException {
+        if (udp_toggle.isSelected()) {
+            udp_toggle.setDisable(true);
+            tcp_toggle.setDisable(false);
+            udp_toggle.setSelected(true);
+            tcp_toggle.setSelected(false);
+            udp_toggle.setDisable(true);
+            tcp_toggle.setDisable(false);
+            button.setDisable(false);
+            connecter.setDisable(true);
+            deconnecter.setDisable(true);
+
+            String adresseServeur = textFieldIP.getText();
+            int port = Integer.parseInt(textFieldPort.getText());
+            udp.connectUDP(textFieldRequette.getText(), InetAddress.getByName(adresseServeur), port);
+        }
+    }
+
+
+    public void tcp_toggle(){
+        if(tcp_toggle.isSelected()){
+            udp_toggle.setDisable(false);
+            tcp_toggle.setDisable(true);
+            udp_toggle.setSelected(false);
+            tcp_toggle.setSelected(true);
+            udp_toggle.setDisable(false);
+            tcp_toggle.setDisable(true);
+            button.setDisable(false);
+            connecter.setDisable(false);
+            deconnecter.setDisable(true);
+        }
+    }
+
+
+
+    private void Connecter() throws IOException {
         //...
         String adresseServeur = textFieldIP.getText();
         int port = Integer.parseInt(textFieldPort.getText());
-        try {
-            tcp = new TCP(InetAddress.getByName(adresseServeur), port, this);
-            tcp.connection();
-            if (tcp.socket.isConnected()) {
-                voyant.setFill(javafx.scene.paint.Color.GREEN);
-                connecter.setDisable(true);
-                deconnecter.setDisable(false);
-                button.setDisable(false);
-                tcp.start();
-                tcp.marche = true;
+        if (tcp_toggle.isSelected()) {
+            try {
+                tcp = new TCP(InetAddress.getByName(adresseServeur), port, this);
+                tcp.connection();
+                if (tcp.socket.isConnected()) {
+                    voyant.setFill(javafx.scene.paint.Color.GREEN);
+                    connecter.setDisable(true);
+                    deconnecter.setDisable(false);
+                    button.setDisable(false);
+                    tcp.start();
+                    tcp.marche = true;
+                }
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-    }
+        }
+
 
     private void Deconnecter() {
         //...
@@ -76,18 +142,16 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
-    private void Requette() {
+    private void Requette() throws IOException {
         //...
-        String requette = textFieldRequette.getText() + "\n" + "\r";
-        try {
-            tcp.requette(requette);
-            //String reponse = bufferedReaderToString(tcp.in);
-            //tcp.updateMessage(reponse);
-            //textAreaReponses.setText(reponse);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        String requette = textFieldRequette.getText() + "\n" + "\r";
+        tcp.requette(requette);
+        //String reponse = bufferedReaderToString(tcp.in);
+        //tcp.updateMessage(reponse);
+        //textAreaReponses.setText(reponse);
+
     }
 
     public String bufferedReaderToString(BufferedReader br) throws IOException {
@@ -98,3 +162,4 @@ public class FXMLDocumentController implements Initializable {
     }
     //...
 }
+
